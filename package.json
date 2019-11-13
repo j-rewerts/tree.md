@@ -1,0 +1,26 @@
+{
+  "name": "tree.md",
+  "version": "1.0.0",
+  "description": "Generates a tree structure for any git repo.",
+  "main": "src/server.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/j-rewerts/tree.md.git"
+  },
+  "keywords": [
+    "git",
+    "github"
+  ],
+  "author": "j-rewerts",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/j-rewerts/tree.md/issues"
+  },
+  "homepage": "https://github.com/j-rewerts/tree.md#readme",
+  "devDependencies": {
+    "jest": "^24.9.0"
+  }
+}
