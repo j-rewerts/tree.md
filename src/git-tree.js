@@ -8,20 +8,19 @@ module.exports = {
   },
   _gitClone: function(url, folder) {
     let p = new Promise((resolve, reject) => {
-      var pResolve = resolve
-      var pReject = reject
-    })
+      // For some reason, stderr contains git's output.
+      exec(`git clone ${url}`, (error, stdout, stderr) => {
+        if (error) {
+          reject(error.message)
+        }
+        if (stderr) {
+          console.error(stderr)
+        }
 
-    exec(`git clone ${url}`, (error, stdout, stderr) => {
-      if (error) {
-        pReject(error.message)
-      }
-      if (stderr) {
-        pReject(stderr)
-      }
-
-      pResolve('path/to/folder')
+        resolve('path/to/folder')
+      })
     })
+    return p
   },
   _gitTree: function(path) {
     return `
