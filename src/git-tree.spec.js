@@ -1,19 +1,20 @@
 const GitTree = require('./git-tree')
+const assert = require('assert')
+let tree = null
 
-beforeEach(() => {
-  console.log('Prep files')
-})
+describe('GitTree', function() {
+  before(function() {
+    tree = new GitTree()
+  })
+  describe('_gitClone', function() {
+    it('passes easily', function() {
+      assert(true, true)
+    })
 
-afterEach(() => {
-  console.log('Cleanup files')
-})
-
-test('passes easily', () => {
-  expect(true).toBe(true)
-})
-
-test('clones repository', () => {
-  return GitTree._gitClone('https://github.com/j-rewerts/tree.md').then(path => {
-    expect(path).toBe('tree.md')
+    it('should clone a basic repo', function() {
+      return tree._gitClone('https://github.com/j-rewerts/tree.md').then(path => {
+        assert(path, 'tree.md')
+      })
+    })
   })
 })

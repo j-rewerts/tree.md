@@ -21,6 +21,6 @@
   },
   "homepage": "https://github.com/j-rewerts/tree.md#readme",
   "devDependencies": {
-    "jest": "^24.9.0"
+    "mocha": "^6.2.2"
   }
 }
