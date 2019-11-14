@@ -7,9 +7,6 @@ describe('GitTree', function() {
     tree = new GitTree()
   })
   describe('_gitClone', function() {
-    it('passes easily', function() {
-      assert.equal(true, true)
-    })
 
     it('should clone a basic repo', function() {
       return tree._gitClone('https://github.com/j-rewerts/tree.md').then(path => {
