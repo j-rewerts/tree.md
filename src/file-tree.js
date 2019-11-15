@@ -14,6 +14,15 @@ class FileTree {
     this.path = path
     this.children = []
   }
+
+  /**
+   * NOTE: This is not cross platform! It only works on OSes with / as
+   * the path separator.
+   */
+  get name() {
+    let brokenPath = this.path.split('/')
+    return brokenPath[brokenPath.length-1]
+  }
 }
 
 /**

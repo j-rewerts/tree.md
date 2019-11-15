@@ -22,5 +22,8 @@
   "homepage": "https://github.com/j-rewerts/tree.md#readme",
   "devDependencies": {
     "mocha": "^6.2.2"
+  },
+  "dependencies": {
+    "handlebars": "^4.5.2"
   }
 }
