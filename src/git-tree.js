@@ -19,7 +19,7 @@ class GitTree {
 
   getTree(url, options) {
     let p
-    if (options.folder) {
+    if (options && options.folder) {
       p = this._gitClone(url, options.folder)
     }
     else {
