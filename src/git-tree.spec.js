@@ -10,7 +10,7 @@ describe('GitTree', function() {
 
     it('should clone a basic repo', function() {
       return tree._gitClone('https://github.com/j-rewerts/tree.md').then(path => {
-        return assert.equal(path, 'tree.md')
+        return assert.ok(path.includes('tree.md'))
       })
     })
 

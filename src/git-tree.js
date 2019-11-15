@@ -1,6 +1,11 @@
 const exec = require('child_process').exec
+const path = require('path')
+const fs = require('fs')
 const buildFileTree = require('./file-builder').buildFileTree
+const os = require('os')
 
+const tempDir = os.tmpdir()
+const sep = path.sep
 
 class GitTree {
   constructor(exec) {
@@ -36,13 +41,25 @@ class GitTree {
    * @param {String} [folder] The folder to clone into.
    * @return {Promise} A promise that resolves with the folder name.
    */
-  _gitClone(url, folder) {
+  async _gitClone(url, folder) {
     if (!folder) {
       folder = url.match(this._urlRegExp)[3]
+      let tempFolder = await this._makeTempDir()
+      folder = path.resolve(tempFolder, folder)
     }
     
-    return this._exec(`git clone ${url} ${folder}`).then(() => {
-      return folder
+    await this._exec(`git clone ${url} ${folder}`)
+    return folder
+  }
+
+  _makeTempDir() {
+    return new Promise((resolve, reject) => {
+      fs.mkdtemp(`${tempDir}${sep}`, function(err, folder) {
+        if (err) {
+          return reject(err)
+        }
+        return resolve(folder)
+      })
     })
   }
 
