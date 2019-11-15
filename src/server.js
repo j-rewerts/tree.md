@@ -13,7 +13,12 @@ fastify.get('/converter/:id', async (request, reply) => {
     return `No ${id} converter available.`
   }
 
-  let url = 'https://github.com/devedmonton/heyburrito'
+  let url = request.query['url']
+  if (!url) {
+    reply.type('text/plain').code(422)
+    return `Please provide a url as a search parameter.`
+  }
+
   const tree = await gitTree.getTree(url)
   const convertedTree = converters[id].converter(tree)
   reply.type(converters[id].type).code(200)
