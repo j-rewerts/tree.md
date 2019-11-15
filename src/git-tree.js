@@ -1,4 +1,5 @@
 const exec = require('child_process').exec
+const buildFileTree = require('./file-builder').buildFileTree
 
 
 class GitTree {
@@ -17,8 +18,16 @@ class GitTree {
   }
 
   getTree(url, options) {
-    let folder = this._gitClone(url)
-    return this._gitTree(folder)
+    let p
+    if (options.folder) {
+      p = this._gitClone(url, options.folder)
+    }
+    else {
+      p = this._gitClone(url)
+    }
+    return p.then(folder => {
+      return buildFileTree(folder)
+    })
   }
 
   /**
@@ -35,16 +44,6 @@ class GitTree {
     return this._exec(`git clone ${url} ${folder}`).then(() => {
       return folder
     })
-  }
-
-  _gitTree(path) {
-    return `
-    README.md
-    this_is_an_example.md
-    fldr
-    |
-    ___ anotherFile.js
-    `
   }
 
   _exec(command) {
