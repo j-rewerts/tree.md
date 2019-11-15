@@ -11,8 +11,10 @@ describe('Converters', function() {
       it('should build this repo into a text tree', function() {
         return gitTree.getTree('https://github.com/doesnotmatter', {folder: './'}).then(tree => {
           let text = toText(tree)
-          console.log(text)
-          // Transform into text
+          assert.equal(text.split('\n')[0], 'tree.md')
+          assert.ok(text.includes('converter.spec.js'))
+          assert.ok(text.includes('text.js'))
+          assert.equal(text.includes('not-a-file.js'), false)
         })
       })
     })
