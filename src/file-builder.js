@@ -33,14 +33,12 @@ function _walk(dir, done) {
  * @returns {Promise} A Promise that resolves with the FileTree.
  */
 function buildFileTree(filePath) {
-  let root = new FileTree(TreeType.FOLDER, path.resolve(filePath))
   return new Promise((resolve, reject) => {
-    _walk(root.path, function(err, results) {
+    _walk(path.resolve(filePath), function(err, results) {
       if (err) {
         reject(err)
       }
-      root.children = results
-      resolve(root)
+      resolve(results)
     })
   })
   
