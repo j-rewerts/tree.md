@@ -1,5 +1,5 @@
 const FileBuilder = require('./file-builder')
-const TreeType = require('./file-tree').Treetype
+const TreeType = require('./models/file-tree').Treetype
 const assert = require('assert')
 
 describe('FileBuilder', function() {

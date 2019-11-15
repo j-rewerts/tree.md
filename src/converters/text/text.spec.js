@@ -1,8 +1,8 @@
 const toText = require('./text')
 const assert = require('assert')
 const path = require('path')
-const FileTree = require('../../file-tree').FileTree
-const TreeType = require('../../file-tree').Treetype
+const FileTree = require('../../models/file-tree').FileTree
+const TreeType = require('../../models/file-tree').Treetype
 
 let cwd = path.resolve('./')
 let basicTree = new FileTree(TreeType.FOLDER, cwd)

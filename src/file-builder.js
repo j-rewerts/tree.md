@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
-const FileTree = require('./file-tree').FileTree
-const TreeType = require('./file-tree').Treetype
+const FileTree = require('./models/file-tree').FileTree
+const TreeType = require('./models/file-tree').Treetype
 
 
 function _walk(dir, done) {
