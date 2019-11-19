@@ -1,0 +1,10 @@
+<text x="{{{x}}}" y="{{{y}}}" class="standard">{{{name}}}</text>
+<svg x="{{{add x scale}}}" y="{{{y}}}">
+  {{#each files}}
+    {{!-- All text elements must be shifted 1 down to avoid being cut off --}}
+    <text x="0" y="{{multiply (add 1 @index) ../scale}}" class="standard">{{{name}}}</text>
+  {{/each}}
+  {{#each folders}}
+    {{> file x=../x y=(multiply (lookup ../spacing @index) ../scale) scale=../scale depth=(add ../depth 1)}}
+  {{/each}}
+</svg>

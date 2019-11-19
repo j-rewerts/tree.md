@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "fastify": "^2.10.0",
-    "handlebars": "^4.5.2"
+    "handlebars": "^4.5.2",
+    "handlebars-helpers": "^0.10.0"
   }
 }
