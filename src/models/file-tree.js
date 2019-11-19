@@ -23,6 +23,18 @@ class FileTree {
     let brokenPath = this.path.split('/')
     return brokenPath[brokenPath.length-1]
   }
+
+  /**
+   * Forces writing of name when converting to JSON.
+   */
+  toJSON() {
+    return {
+      type: this.type,
+      path: this.path,
+      children: this.children,
+      name: this.name
+    }
+  }
 }
 
 /**
