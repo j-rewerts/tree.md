@@ -1,10 +1,20 @@
-<text x="{{{x}}}" y="{{{y}}}" class="standard">{{{name}}}</text>
-<svg x="{{{add x scale}}}" y="{{{y}}}">
-  {{#each files}}
-    {{!-- All text elements must be shifted 1 down to avoid being cut off --}}
-    <text x="0" y="{{multiply (add 1 @index) ../scale}}" class="standard">{{{name}}}</text>
-  {{/each}}
-  {{#each folders}}
-    {{> file x=../x y=(multiply (lookup ../spacing @index) ../scale) scale=../scale depth=(add ../depth 1)}}
-  {{/each}}
+{{!-- Draw a vertical line from the base of the title to the last folder --}}
+{{#if spacing}}
+<rect x="0" y="{{scale}}" width="1" height="{{multiply scale (last spacing)}}" fill= "#000" />
+{{/if}}
+
+<text x="0" y="{{scale}}" class="standard">{{name}}</text>
+{{#each files}}
+{{!-- All text elements must be shifted 1 down to avoid being cut off --}}
+<text x="{{../scale}}" y="{{multiply (add 2 @index) ../scale}}" class="standard">{{name}}</text>
+{{/each}}
+
+{{#if folders}}
+{{#each folders}}
+{{!-- Draw a horizontal line from the vertical line to each folder --}}
+<rect x="0" y="{{alignHalfScaleUp (lookup ../spacing @index) ../scale}}" width="{{../scale}}" height="1" fill="#000" />
+<svg x="{{../scale}}" y="{{multiply (lookup ../spacing @index) ../scale}}">
+    {{> file scale=../scale depth=(add ../depth 1)}}
 </svg>
+{{/each}}
+{{/if}}
