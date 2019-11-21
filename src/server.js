@@ -25,7 +25,7 @@ fastify.get('/converter/:id', async (request, reply) => {
   return convertedTree
 })
 
-fastify.listen(process.env.PORT || 80, (err, address) => {
+fastify.listen(process.env.PORT || 80, '0.0.0.0', (err, address) => {
   if (err) throw err
   fastify.log.info(`server listening on ${address}`)
 })
