@@ -22,7 +22,8 @@
   },
   "homepage": "https://github.com/j-rewerts/tree.md#readme",
   "devDependencies": {
-    "mocha": "^6.2.2"
+    "mocha": "^6.2.2",
+    "snap-shot-it": "^7.9.1"
   },
   "dependencies": {
     "fastify": "^2.10.0",
