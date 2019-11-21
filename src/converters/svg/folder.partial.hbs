@@ -14,7 +14,7 @@
 {{!-- Draw a horizontal line from the vertical line to each folder --}}
 <rect x="0" y="{{alignHalfScaleUp (lookup ../spacing @index) ../scale}}" width="{{../scale}}" height="1" fill="#000" />
 <svg x="{{../scale}}" y="{{multiply (lookup ../spacing @index) ../scale}}">
-    {{> file scale=../scale depth=(add ../depth 1)}}
+    {{> displayFolder scale=../scale depth=(add ../depth 1)}}
 </svg>
 {{/each}}
 {{/if}}

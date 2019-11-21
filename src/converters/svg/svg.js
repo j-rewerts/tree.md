@@ -11,8 +11,9 @@ helpers.array({
 })
 const fileTreeSource = fs.readFileSync('src/converters/svg/file-tree.hbs', 'utf-8')
 const fileSource = fs.readFileSync('src/converters/svg/folder.partial.hbs', 'utf-8')
+
 const fileTreeTemplate = Handlebars.compile(fileTreeSource)
-Handlebars.registerPartial('file', fileSource)
+Handlebars.registerPartial('displayFolder', fileSource)
 
 /**
  * Used to align items halfway through the grid. This is convenient
