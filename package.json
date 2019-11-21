@@ -4,7 +4,8 @@
   "description": "Generates a tree structure for any git repo.",
   "main": "src/server.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "debug": "nodemon --inspect ./src/server.js"
   },
   "repository": {
     "type": "git",
