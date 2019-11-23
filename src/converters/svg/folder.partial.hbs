@@ -1,6 +1,6 @@
 {{!-- Draw a vertical line from the base of the title to the last folder --}}
 {{#if spacing}}
-<rect x="0" y="{{scale}}" width="1" height="{{multiply scale (last spacing)}}" fill= "#000" />
+<rect x="0" y="{{scale}}" width="3" height="{{multiply scale (last spacing)}}" fill="#000" />
 {{/if}}
 
 <text x="0" y="{{scale}}" class="standard">{{name}}</text>
@@ -12,9 +12,9 @@
 {{#if folders}}
 {{#each folders}}
 {{!-- Draw a horizontal line from the vertical line to each folder --}}
-<rect x="0" y="{{alignHalfScaleUp (lookup ../spacing @index) ../scale}}" width="{{../scale}}" height="1" fill="#000" />
+<rect x="0" y="{{alignHalfScaleUp (lookup ../spacing @index) ../scale}}" width="{{../scale}}" height="3" fill="#000" />
 <svg x="{{../scale}}" y="{{multiply (lookup ../spacing @index) ../scale}}">
-    {{> displayFolder scale=../scale depth=(add ../depth 1)}}
+  {{> displayFolder scale=../scale depth=(add ../depth 1)}}
 </svg>
 {{/each}}
 {{/if}}
