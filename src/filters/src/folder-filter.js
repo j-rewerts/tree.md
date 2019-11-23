@@ -1,5 +1,5 @@
-const FOLDER = require('../models/file-tree').Treetype.FOLDER
-const FileTree = require('../models/file-tree').FileTree
+const FOLDER = require('../../models/file-tree').Treetype.FOLDER
+const FileTree = require('../../models/file-tree').FileTree
 
 /**
  * Filters out all files, leaving only folders. The input FileTree is not
@@ -19,4 +19,6 @@ let folderFilter = fileTree => {
   return folderTree
 }
 
-module.exports = folderFilter
+module.exports = {
+  folderfilter: folderFilter
+}

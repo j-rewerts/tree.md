@@ -4,7 +4,7 @@ const path = require('path')
 const assert = require('assert')
 
 // Filters
-const folderFilter = require('./folder-filter')
+const folderFilter = require('./src/folder-filter').folderfilter
 
 const cwd = path.resolve('./')
 const basicTree = new FileTree(TreeType.FOLDER, cwd)
