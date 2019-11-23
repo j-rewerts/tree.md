@@ -1,16 +1,16 @@
-const exec = require('child_process').exec
 const path = require('path')
 const fs = require('fs')
 const buildFileTree = require('./file-builder').buildFileTree
 const os = require('os')
+const simpleGit = require('simple-git/promise')()
 
 const tempDir = os.tmpdir()
 const sep = path.sep
 
 class GitTree {
-  constructor(exec) {
-    if (exec) {
-      this._exec = exec
+  constructor(clone) {
+    if (clone) {
+      this._clone = clone
     }
     // This RegExp helps match urls.
     // For GitHub urls, capturing groups from string.match are as follows:
@@ -47,14 +47,14 @@ class GitTree {
       let tempFolder = await this._makeTempDir()
       folder = path.resolve(tempFolder, folder)
     }
-    
-    await this._exec(`git clone ${url} ${folder}`)
+
+    await this._clone(url, folder)
     return folder
   }
 
   _makeTempDir() {
     return new Promise((resolve, reject) => {
-      fs.mkdtemp(`${tempDir}${sep}`, function(err, folder) {
+      fs.mkdtemp(`${tempDir}${sep}`, function (err, folder) {
         if (err) {
           return reject(err)
         }
@@ -63,17 +63,8 @@ class GitTree {
     })
   }
 
-  _exec(command) {
-    return new Promise((resolve, reject) => {
-      // For some reason, stderr contains git's output.
-      exec(command, (error, stdout, stderr) => {
-        if (error) {
-          reject(error.message)
-        }
-
-        resolve({stdout, stderr})
-      })
-    })
+  _clone(repo, folder) {
+    return simpleGit.clone(repo, folder)
   }
 }
 
