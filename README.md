@@ -26,4 +26,4 @@ Simply embed something like the following in your repository:
 `![Alt text](https://tree-md.herokuapp.com/converter/svg?url=HTTPS_REPO_URL)`
 
 ## Example
-![Alt text](https://tree-md.herokuapp.com/converter/svg?url=https://github.com/j-rewerts/tree.md)
+![Alt text](https://tree-md.herokuapp.com/converter/svg?url=https://github.com/j-rewerts/tree.md&filter1=regex&filter1regex=%5E%5Ba-zA-Z%5D.%2A)
