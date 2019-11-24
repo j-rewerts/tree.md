@@ -4,7 +4,8 @@ const path = require('path')
 const assert = require('assert')
 
 // Filters
-const folderFilter = require('./src/folder-filter').folderfilter
+const folderFilter = require('./src/folder-filter').folder
+const regexpFilter = require('./src/regex-filter').regex
 
 const cwd = path.resolve('./')
 const basicTree = new FileTree(TreeType.FOLDER, cwd)
@@ -50,6 +51,28 @@ describe('Filters', function () {
       let children = flattenChildren(folderTree)
       children.forEach(child => {
         assert.equal(child.type, TreeType.FOLDER)
+      })
+    })
+  })
+
+  describe('regexp', function () {
+
+    it('should filter out all FileTrees that don\'t start with a letter.', function () {
+      let tree = regexpFilter(basicTree, {
+        regex: '^[a-zA-Z].*'
+      })
+      let children = flattenChildren(tree)
+      assert.equal(children.length, 15)
+      children.forEach(child => {
+        assert.ok(/[a-zA-Z]/.test(child.name[0]))
+      })
+    })
+
+    it('should fail when given an invalid regular expression', function () {
+      assert.throws(() => {
+        regexpFilter(basicTree, {
+          regex: '^[a-zA-Z.*'
+        })
       })
     })
   })
