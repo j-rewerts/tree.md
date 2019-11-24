@@ -20,5 +20,5 @@ let folderFilter = fileTree => {
 }
 
 module.exports = {
-  folderfilter: folderFilter
+  folder: folderFilter
 }
