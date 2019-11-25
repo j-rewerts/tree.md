@@ -35,7 +35,12 @@ fastify.get('/converter/:id', async (request, reply) => {
 
   let tree = await gitTree.getTree(url)
   for ({ type, options, f } of filterArray) {
-    tree = f(tree, options)
+    try {
+      tree = f(tree, options)
+    } catch (err) {
+      reply.type('text/plain').code(500)
+      return `Failed when running ${type} filter.`
+    }
   }
   const convertedTree = converters[id].converter(tree)
   reply.type(converters[id].type).code(200)
