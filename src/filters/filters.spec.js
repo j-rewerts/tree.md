@@ -6,6 +6,7 @@ const assert = require('assert')
 // Filters
 const folderFilter = require('./src/folder-filter').folder
 const regexpFilter = require('./src/regex-filter').regex
+const pathFilter = require('./src/path-filter').path
 
 const cwd = path.resolve('./')
 const basicTree = new FileTree(TreeType.FOLDER, cwd)
@@ -74,6 +75,26 @@ describe('Filters', function () {
           regex: '^[a-zA-Z.*'
         })
       })
+    })
+  })
+
+  describe('path', function () {
+    it('should filter 1 level deep', function () {
+      let tree = pathFilter(basicTree, { path: '.vscode' })
+      assert.ok(tree)
+      assert.equal(tree.name, '.vscode')
+      assert.equal(tree.children.length, 2)
+      assert.deepStrictEqual(tree, basicTree.children[5])
+      assert.ok(tree !== basicTree.children[5], 'The returned tree is not a new reference.')
+    })
+
+    it('should filter 2 levels deep', function () {
+      let tree = pathFilter(basicTree, { path: 'src/converters' })
+      assert.ok(tree)
+      assert.equal(tree.name, 'converters')
+      assert.equal(tree.children.length, 5)
+      assert.deepStrictEqual(tree, basicTree.children[4].children[3])
+      assert.ok(tree !== basicTree.children[4].children[3], 'The returned tree is not a new reference.')
     })
   })
 })
