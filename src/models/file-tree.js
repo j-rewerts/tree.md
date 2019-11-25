@@ -21,7 +21,7 @@ class FileTree {
    */
   get name() {
     let brokenPath = this.path.split('/')
-    return brokenPath[brokenPath.length-1]
+    return brokenPath[brokenPath.length - 1]
   }
 
   /**
@@ -35,6 +35,24 @@ class FileTree {
       name: this.name
     }
   }
+
+  /**
+   * Converts a string into a FileTree. Fails spectacularily if
+   * the string isn't the right format.
+   * @param {String} str A JSON string.
+   */
+  static fromJson(str) {
+    let obj = JSON.parse(str)
+    return cvt(obj)
+  }
+}
+
+function cvt(tree) {
+  let newTree = new FileTree(tree.type, tree.path)
+  newTree.children = tree.children.map(child => {
+    return cvt(child)
+  })
+  return newTree
 }
 
 /**
@@ -43,8 +61,8 @@ class FileTree {
  * @const {String} TreeType.FOLDER A folder type.
  */
 const TreeType = {
-    FILE: 'FILE',
-    FOLDER: 'FOLDER'
+  FILE: 'FILE',
+  FOLDER: 'FOLDER'
 }
 
 module.exports = {
