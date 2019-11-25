@@ -4,9 +4,22 @@ const fastify = require('fastify')({
 const converters = require('./converters')
 const filters = require('./filters')
 const GitTree = require('./git-tree')
+let Cache = require('./cache/inmem-cache')
 
 let gitTree = new GitTree()
 let filterOptionReg = new RegExp('filter(\\d)([a-zA-Z]+)')
+let cache = new Cache({
+  ttl: parseInt(process.env.CACHE_TTL) || 60000
+})
+
+
+async function main() {
+  await cache.initialize()
+  fastify.listen(process.env.PORT || 80, '0.0.0.0', (err, address) => {
+    if (err) throw err
+    fastify.log.info(`server listening on ${address}`)
+  })
+}
 
 fastify.get('/converter/:id', async (request, reply) => {
   let id = request.params.id
@@ -33,7 +46,13 @@ fastify.get('/converter/:id', async (request, reply) => {
     return err.message
   }
 
-  let tree = await gitTree.getTree(url)
+  // Cache prior to filtering.
+  let tree = await cache.get(url)
+  if (!tree) {
+    tree = await gitTree.getTree(url)
+    await cache.set(url, tree)
+  }
+
   for ({ type, options, f } of filterArray) {
     try {
       tree = f(tree, options)
@@ -45,11 +64,6 @@ fastify.get('/converter/:id', async (request, reply) => {
   const convertedTree = converters[id].converter(tree)
   reply.type(converters[id].type).code(200)
   return convertedTree
-})
-
-fastify.listen(process.env.PORT || 80, '0.0.0.0', (err, address) => {
-  if (err) throw err
-  fastify.log.info(`server listening on ${address}`)
 })
 
 /** 
@@ -99,3 +113,5 @@ let buildFilters = (filterQueries) => {
   }
   return filtersArray
 }
+
+main()
