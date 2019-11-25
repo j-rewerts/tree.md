@@ -36,3 +36,7 @@ Any number of parameters can be passed, though it's up to the filter function wh
 | Show only folders | Ignore dot files and folders | Show files/folders starting with letters | Show only folders that aren't dot folders |
 |-------------------|------------------------------|------------------------------------------|-------------------------------------------|
 | ![Alt text](https://tree-md.herokuapp.com/converter/svg?url=https://github.com/j-rewerts/tree.md&filter1=folder) | ![Alt text](https://tree-md.herokuapp.com/converter/svg?url=https://github.com/j-rewerts/tree.md&filter1=regex&filter1regex=%5E%5B%5E%5C.%5D.%2A) | ![Alt text](https://tree-md.herokuapp.com/converter/svg?url=https://github.com/j-rewerts/tree.md&filter1=regex&filter1regex=%5E%5Ba-zA-Z%5D.%2A) | ![Alt text](https://tree-md.herokuapp.com/converter/svg?url=https://github.com/j-rewerts/tree.md&filter1=folder&filter2=regex&filter2regex=%5E%5B%5E%5C.%5D.%2A) |
+
+| Show files at subpath | Show only folders at subpath |  |  |
+|-------------------|------------------------------|------------------------------------------|-------------------------------------------|
+| ![Alt text](https://tree-md.herokuapp.com/converter/svg?url=https://github.com/j-rewerts/tree.md&filter1=path&filter1path=src/filters) | ![Alt text](https://tree-md.herokuapp.com/converter/svg?url=https://github.com/j-rewerts/tree.md&filter1=folder&filter2=path&filter2path=src/filters) |  |  |
