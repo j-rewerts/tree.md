@@ -76,6 +76,28 @@ describe('Filters', function () {
         })
       })
     })
+
+    it('should ignore folders', function () {
+      let tree = regexpFilter(basicTree, {
+        regex: '^1234abcd',
+        ignoreFolders: true
+      })
+      let children = flattenChildren(tree)
+      children.forEach(child => {
+        assert.ok(child.isFolder(), 'Should only contain folders.')
+      })
+    })
+
+    it('should filter only spec files.', function () {
+      let tree = regexpFilter(basicTree, {
+        regex: '.*\\.spec.js',
+        ignoreFolders: true
+      })
+      let children = flattenChildren(tree)
+      children.forEach(child => {
+        assert.ok(child.isFolder() || child.name.includes('spec'), 'Should only contain folders or tests.')
+      })
+    })
   })
 
   describe('path', function () {

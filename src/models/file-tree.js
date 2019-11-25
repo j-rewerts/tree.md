@@ -25,6 +25,14 @@ class FileTree {
   }
 
   /**
+   * Tests whether this object is a folder.
+   * @returns {boolean} True if this is a TreeType.FOLDER.
+   */
+  isFolder() {
+    return this.type === TreeType.FOLDER
+  }
+
+  /**
    * Forces writing of name when converting to JSON.
    */
   toJSON() {
