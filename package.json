@@ -27,7 +27,7 @@
     "snap-shot-it": "^7.9.1"
   },
   "dependencies": {
-    "fastify": "^2.10.0",
+    "fastify": "^2.15.1",
     "handlebars": "^4.5.3",
     "handlebars-helpers": "^0.10.0",
     "simple-git": "^1.126.0"
