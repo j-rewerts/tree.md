@@ -30,6 +30,6 @@
     "fastify": "^2.10.0",
     "handlebars": "^4.5.3",
     "handlebars-helpers": "^0.10.0",
-    "simple-git": "^1.126.0"
+    "simple-git": "^3.5.0"
   }
 }
