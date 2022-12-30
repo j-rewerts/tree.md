@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/j-rewerts/tree.md#readme",
   "devDependencies": {
-    "mocha": "^6.2.2",
+    "mocha": "^10.2.0",
     "snap-shot-it": "^7.9.1"
   },
   "dependencies": {
